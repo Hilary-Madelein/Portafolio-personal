@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Variables de tema para Tailwind v4 */
+@theme {
+  --color-primaryLight: #D14D72;
+  --color-secondaryLight: #FFEFEF;
+  --color-neutralLight: #F6F6F6;
+  --color-accentLight: #FF8BA7;
+  --color-backgroundLight: #FFFFFF;
+  --color-fontLight: #343131;
+
+  --color-fontDark: #FFFFF;
+  --color-backgroundDark: #222831;
+  --color-primaryDark: #FFFF|;
+  --color-secondaryDark: #000000;
+  --color-neutralDark: #7F8CAA;
+  --color-accentDark: #EAEFEF;
+
+  --font-sans: 'Inter', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Estilos globales */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-neutralLight);
+  color: var(--color-neutralDark);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark body {
+  background-color: var(--color-neutralDark);
+  color: var(--color-neutralLight);
+}
+
+/* Clases utilitarias personalizadas */
+/* Clases utilitarias personalizadas */
+
+/* Fondos */
+.bg-primary { background-color: var(--color-primaryLight); }
+.dark .bg-primary { background-color: var(--color-primaryDark); }
+
+.bg-secondary { background-color: var(--color-secondaryLight); }
+.dark .bg-secondary { background-color: var(--color-secondaryDark); }
+
+.bg-accent { background-color: var(--color-accentLight); }
+.dark .bg-accent { background-color: var(--color-accentDark); }
+
+.bg-neutral { background-color: var(--color-neutralLight); }
+.dark .bg-neutral { background-color: var(--color-neutralDark); }
+
+.bg-background { background-color: var(--color-backgroundLight); }
+.dark .bg-background { background-color: var(--color-backgroundDark); }
+
+/* Texto */
+.text-primary { color: var(--color-primaryLight); }
+.dark .text-primary { color: var(--color-primaryDark); }
+
+.text-secondary { color: var(--color-secondaryLight); }
+.dark .text-secondary { color: var(--color-secondaryDark); }
+
+.text-accent { color: var(--color-fontLight); }
+.dark .text-accent { color: var(--color-fontDark); }
+
+.text-neutral { color: var(--color-neutralLight); }
+.dark .text-neutral { color: var(--color-neutralDark); }
+
+.text-background { color: var(--color-backgroundLight); }
+.dark .text-background { color: var(--color-backgroundDark); }
+
+/* Bordes */
+.border-primary { border-color: var(--color-primaryLight); }
+.dark .border-primary { border-color: var(--color-primaryDark); }
+
+.border-secondary { border-color: var(--color-secondaryLight); }
+.dark .border-secondary { border-color: var(--color-secondaryDark); }
+
+.border-accent { border-color: var(--color-accentLight); }
+.dark .border-accent { border-color: var(--color-accentDark); }
+
+.border-neutral { border-color: var(--color-neutralLight); }
+.dark .border-neutral { border-color: var(--color-neutralDark); }
+
+
+.btn-custom {
+  @apply px-6 py-3 rounded-lg font-semibold transition;
+  background-color: var(--color-primaryLight);
+  color: var(--color-backgroundLight);
+}
+
+.btn-custom:hover {
+  @apply opacity-90;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--color-accentLight);
+  color: var(--color-primaryLight);
+}
+
+/* Para modo oscuro */
+.dark .btn-custom {
+  background-color: var(--color-primaryDark);
+  color: var(--color-backgroundLight);
+}
+
+.dark .btn-custom:hover {
+  @apply opacity-90;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--color-accentDark);
+  color: var(--color-primaryDark);
+}
+
+html {
+  scroll-behavior: smooth;
 }
