@@ -5,39 +5,70 @@ type ContactProps = {
   id?: string;
 };
 
-export default function Contact({ language }: ContactProps) {
+export default function Contact({ language, id = 'contact' }: ContactProps) {
   return (
     <section
-      id="contact"
-      className="min-h-screen px-8 sm:px-20 py-20 bg-background dark:bg-background text-primary dark:text-primary transition-colors duration-300"
+      id={id}
+      className="hero min-h-screen"
+      aria-label={language === 'es' ? 'Sección de Contacto' : 'Contact Section'}
     >
-      <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
-        {language === 'es' ? 'Contacto' : 'Contact'}
-      </h2>
+      <div className="w-full max-w-3xl mx-auto px-6 sm:px-10 lg:px-12 py-16 md:py-20">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-hero-primary">
+          {language === 'es' ? 'Contacto' : 'Contact'}
+        </h2>
 
-      <form className="max-w-2xl mx-auto flex flex-col gap-6">
-        <input
-          type="text"
-          placeholder={language === 'es' ? 'Nombre' : 'Name'}
-          className="p-4 rounded-lg bg-primary dark:bg-primary text-primary dark:text-primary border border-accent dark:border-accent focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent transition"
-        />
-        <input
-          type="email"
-          placeholder={language === 'es' ? 'Correo electrónico' : 'Email'}
-          className="p-4 rounded-lg bg-primary dark:bg-primary text-primary dark:text-primary border border-accent dark:border-accent focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent transition"
-        />
-        <textarea
-          placeholder={language === 'es' ? 'Mensaje' : 'Message'}
-          rows={6}
-          className="p-4 rounded-lg bg-primary dark:bg-primary text-primary dark:text-primary border border-accent dark:border-accent focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent transition"
-        />
-        <button
-          type="submit"
-          className="px-6 py-3 rounded-lg font-semibold bg-accent dark:bg-accent text-primary dark:text-primary hover:opacity-90 transition"
-        >
-          {language === 'es' ? 'Enviar' : 'Send'}
-        </button>
-      </form>
+        <form className="mt-12 flex flex-col gap-6">
+          {/* Nombre */}
+          <input
+            type="text"
+            placeholder={language === 'es' ? 'Nombre' : 'Name'}
+            className="
+              p-4 rounded-2xl
+              bg-card dark:bg-neutral
+              shadow-md dark:shadow-[0_4px_12px_rgba(0,0,0,0.35)]
+              focus:outline-none focus:ring-2 focus:ring-primary/50
+              text-hero-body dark:text-fontDark
+              transition
+            "
+          />
+
+          {/* Email */}
+          <input
+            type="email"
+            placeholder={language === 'es' ? 'Correo electrónico' : 'Email'}
+            className="
+              p-4 rounded-2xl
+              bg-card dark:bg-neutral
+              shadow-md dark:shadow-[0_4px_12px_rgba(0,0,0,0.35)]
+              focus:outline-none focus:ring-2 focus:ring-primary/50
+              text-hero-body dark:text-fontDark
+              transition
+            "
+          />
+
+          {/* Mensaje */}
+          <textarea
+            placeholder={language === 'es' ? 'Mensaje' : 'Message'}
+            rows={6}
+            className="
+              p-4 rounded-2xl
+              bg-card dark:bg-neutral
+              shadow-md dark:shadow-[0_4px_12px_rgba(0,0,0,0.35)]
+              focus:outline-none focus:ring-2 focus:ring-primary/50
+              text-hero-body dark:text-fontDark
+              transition
+            "
+          />
+
+          {/* Botón */}
+          <button
+            type="submit"
+            className="btn-hero"
+          >
+            {language === 'es' ? 'Enviar' : 'Send'}
+          </button>
+        </form>
+      </div>
     </section>
   );
 }

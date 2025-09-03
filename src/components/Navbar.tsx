@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { Sun, Moon } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navbar() {
   const { toggleDarkMode } = useTheme();
@@ -16,9 +17,10 @@ export default function Navbar() {
     const observer = new MutationObserver(() => {
       setIsDarkMode(document.documentElement.classList.contains('dark'));
     });
-
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
     return () => observer.disconnect();
   }, []);
 
@@ -31,11 +33,29 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 flex flex-col md:flex-row justify-between items-center p-6 shadow-md transition-colors duration-300 bg-secondary dark:bg-secondary">
+    <nav className="navbar-surface fixed top-0 left-0 right-0 w-full z-50 flex flex-col md:flex-row justify-between items-center px-6 py-1 sm:px-20 transition-colors duration-300">
+      {/* Logo / Icono */}
       <div className="flex justify-between w-full md:w-auto items-center">
-        <h1 className="text-xl font-bold text-primary dark:text-primary">
-          Mi Portafolio
-        </h1>
+        <a href="#hero" className="flex items-center gap-2">
+          {/* Icono en claro */}
+          {!isDarkMode && (
+            <Image
+              src="/img/Logotipo madelein claro.png"
+              alt="Logo claro"
+              width={200}
+              height={200}
+            />
+          )}
+          {/* Icono en oscuro */}
+          {isDarkMode && (
+            <Image
+              src="/img/Logotipo madelein oscuro.png"
+              alt="Logo oscuro"
+              width={200}
+              height={200}
+            />
+          )}
+        </a>
 
         {/* Botón hamburguesa en móviles */}
         <button
@@ -70,31 +90,36 @@ export default function Navbar() {
 
       {/* Enlaces */}
       <div
-        className={`flex-col md:flex-row md:flex gap-6 items-center w-full md:w-auto mt-4 md:mt-0 ${isOpen ? 'flex' : 'hidden md:flex'
-          }`}
+        className={`flex-col md:flex-row md:flex gap-6 items-center w-full md:w-auto mt-4 md:mt-0 ${
+          isOpen ? 'flex' : 'hidden md:flex'
+        }`}
       >
         {sections.map((section) => (
           <a
             key={section.id}
             href={`#${section.id}`}
-            className="font-semibold text-primary dark:text-primary hover:underline hover:underline-offset-4 transition"
+            className="font-semibold text-primary dark:text-primary relative group"
             onClick={() => setIsOpen(false)}
           >
             {section.label}
+            {/* Animación underline */}
+            <span className="absolute left-0 bottom-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 origin-bottom transition-transform duration-300"></span>
           </a>
         ))}
 
+        {/* Toggle Dark Mode */}
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded hover:opacity-90 transition bg-background dark:bg-background text-primary dark:text-primary"
+          className="p-2 rounded hover:opacity-90 transition bg-accent dark:bg-accent text-primary dark:text-primary"
           aria-label="Toggle Dark Mode"
         >
           {isDarkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
         </button>
 
+        {/* Toggle Language */}
         <button
           onClick={toggleLanguage}
-          className="px-4 py-2 rounded font-semibold hover:opacity-90 transition bg-background dark:bg-background text-primary dark:text-primary"
+          className="px-4 py-2 rounded font-semibold hover:opacity-90 transition bg-accent dark:bg-accent text-primary dark:text-primary"
         >
           {language === 'es' ? 'EN' : 'ES'}
         </button>

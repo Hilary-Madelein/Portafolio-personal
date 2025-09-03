@@ -8,13 +8,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-secondary text-primary w-full py-10 px-6 sm:px-20 transition-colors duration-300">
+    <footer
+      className="
+        bg-accent
+        text-primary w-full py-10 px-6 sm:px-20
+        transition-colors duration-300
+      "
+    >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-8">
-        {/* Logo o nombre */}
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-xl tracking-wide">Mi Portafolio</span>
-        </div>
-
         {/* Navegación */}
         <nav className="flex gap-8 flex-wrap justify-center sm:justify-start text-base font-medium">
           <a
@@ -66,7 +67,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="mt-8 text-center text-sm text-primary/80 dark:text-primary/70">
-        © {currentYear} Mi Portafolio ·{' '}
+        © {currentYear}{' '}
         {language === 'es'
           ? 'Todos los derechos reservados.'
           : 'All rights reserved.'}

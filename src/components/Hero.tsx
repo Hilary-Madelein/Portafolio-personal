@@ -1,82 +1,76 @@
 'use client';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-type HeroProps = {
-  language: 'es' | 'en';
-};
+type HeroProps = { language: 'es' | 'en' };
 
 export default function Hero({ language }: HeroProps) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const [isDark, setIsDark] = useState(false);
   useEffect(() => {
-    setIsDarkMode(document.documentElement.classList.contains('dark'));
-
-    const observer = new MutationObserver(() => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
-    });
-
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
+    const update = () => setIsDark(document.documentElement.classList.contains('dark'));
+    update();
+    const obs = new MutationObserver(update);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => obs.disconnect();
   }, []);
 
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex flex-col md:flex-row justify-center items-center text-center md:text-left px-8 sm:px-20 gap-12 transition-colors duration-300 bg-background text-primary"
-    >
-      {/* IZQUIERDA: Foto, nombre, presentación y botones */}
-      <div className="flex flex-col justify-center items-center md:items-start gap-6 md:w-1/2">
-        {/* Foto */}
-        <div className="w-55 h-55 relative rounded-full overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-500">
-        <img
-          src='./img/FOTO_PERSONAL.jpeg'
-          alt="Personal Icon"
-          className="w-full h-full object-cover object-center"
-        />
+    <section id="hero" className="hero">
+      <div className="relative z-10 w-full max-w-[980px] mx-auto px-6 sm:px-10 lg:px-12 py-16 md:py-20">
+        <div className="flex flex-col items-center text-center gap-6">
+          {/* Avatar grande */}
+          <div className="avatar-lg rounded-full p-[2px] bg-gradient-to-r from-primary to-accent shadow-xl">
+            <img
+              src="/img/FOTO_PERSONAL.jpeg"
+              alt={language === 'es' ? 'Foto de Hilary' : 'Hilary photo'}
+              className="w-full h-full rounded-full object-cover avatar-ring"
+            />
+          </div>
+
+          {/* Título */}
+          <h1 className="text-[42px] sm:text-6xl font-extrabold tracking-tight text-hero-primary">
+            {language === 'es' ? 'Hola, soy Hilary' : 'Hi, I’m Hilary'}
+          </h1>
+
+          {/* Subtítulo */}
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[.18em] text-hero-body opacity-80">
+            {language === 'es'
+              ? 'Ingeniera en Computación | Full Stack Dev'
+              : 'Software Engineer | Full-Stack Dev'}
+          </p>
+
+          {/* Descripción */}
+          <p className="max-w-[860px] text-lg sm:text-xl leading-relaxed text-hero-body">
+            {language === 'es'
+              ? 'Apasionada por crear soluciones tecnológicas y diseñar experiencias digitales únicas.'
+              : 'Passionate about building tech solutions and crafting delightful digital experiences.'}
+          </p>
+
+          {/* Botones */}
+          <div className="mt-2 flex flex-wrap gap-4 justify-center">
+            <a href="#projects" className="btn-hero">
+              {language === 'es' ? 'Ver Proyectos' : 'View Projects'}
+            </a>
+            <a href="#contact" className="btn-hero-outline">
+              {language === 'es' ? 'Contacto' : 'Contact'}
+            </a>
+          </div>
+
+          {/* Métricas */}
+          <div className="mt-8 flex gap-10 text-sm text-hero-body">
+            <div className="flex flex-col items-center">
+              <span className="text-2xl font-bold text-hero-primary">+10</span>
+              {language === 'es' ? 'Proyectos' : 'Projects'}
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-xl">🎓</span>
+              {language === 'es' ? 'Computación' : 'CS Degree'}
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-xl">🇪🇨</span>
+              Ecuador
+            </div>
+          </div>
         </div>
-
-        {/* Nombre con gradiente */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primaryLight to-accentLight dark:from-primaryDark dark:to-accentDark">
-          {language === 'es' ? 'Hola, soy Hilary' : 'Hi, I am Hilary'}
-        </h1>
-
-        {/* Presentación */}
-        <p className="text-lg sm:text-xl max-w-md opacity-80 text-accent dark:text-accent">
-          {language === 'es'
-            ? 'Desarrolladora Full Stack y diseñadora de experiencias digitales.'
-            : 'Full Stack Developer and digital experiences designer.'}
-        </p>
-
-        {/* Botones con hover elegante */}
-        <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <a
-            href="#projects"
-            className="px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-primaryLight dark:bg-primaryDark text-backgroundLight dark:text-backgroundDark hover:bg-accentLight dark:hover:bg-accentDark hover:text-primaryLight dark:hover:text-primaryDark shadow-md hover:shadow-xl"
-          >
-            {language === 'es' ? 'Ver Proyectos' : 'View Projects'}
-          </a>
-
-          <a
-            href="#contact"
-            className="px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-primaryLight dark:bg-primaryDark text-backgroundLight dark:text-backgroundDark hover:bg-accentLight dark:hover:bg-accentDark hover:text-primaryLight dark:hover:text-primaryDark shadow-md hover:shadow-xl"
-          >
-            {language === 'es' ? 'Contacto' : 'Contact'}
-          </a>
-        </div>
-      </div>
-
-      {/* DERECHA: GIF animado */}
-      <div className="md:w-1/2 flex justify-center items-center">
-        <img
-          src={
-            isDarkMode
-              ? 'img/OSCURO.png'
-              : 'img/CLARO.png'
-          }
-          alt="Hero GIF"
-          className="w-full h-full object-cover  transition-transform transform hover:scale-110"
-        />
       </div>
     </section>
   );

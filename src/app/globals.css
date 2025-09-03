@@ -1,112 +1,148 @@
 @import "tailwindcss";
 
-/* Variables de tema para Tailwind v4 */
+/* ===============================
+   PALETA (Tailwind v4 @theme)
+   =============================== */
 @theme {
-  --color-primaryLight: #D14D72;
-  --color-secondaryLight: #FFEFEF;
-  --color-neutralLight: #F6F6F6;
-  --color-accentLight: #FF8BA7;
+  /* Light */
+  --color-primaryLight: #D14D72;   /* rosa principal */
+  --color-secondaryLight: #FFEFEF; /* superficies/chips */
+  --color-neutralLight: #F6F6F6;   /* fondo app */
+  --color-accentLight: #FF8BA7;    /* acento */
   --color-backgroundLight: #FFFFFF;
-  --color-fontLight: #343131;
+  --color-fontLight: #343131;      /* texto */
 
-  --color-fontDark: #FFFFF;
-  --color-backgroundDark: #222831;
-  --color-primaryDark: #FFFF|;
-  --color-secondaryDark: #000000;
-  --color-neutralDark: #7F8CAA;
-  --color-accentDark: #EAEFEF;
+  /* Dark */
+  --color-backgroundDark: #1F2329;
+  --color-secondaryDark: #2A2F36;
+  --color-neutralDark: #1C2026;
+  --color-primaryDark: #FF9DB4;    /* rosa usable en dark */
+  --color-accentDark: #B24B4B;
+  --color-fontDark: #E7ECF3;
 
   --font-sans: 'Inter', sans-serif;
 }
 
-/* Estilos globales */
+/* Altura real del navbar (ajústala a tu valor real) */
+:root { --nav-h: 0px; }
+
+/* ===============================
+   BASE
+   =============================== */
 body {
   font-family: var(--font-sans);
   background-color: var(--color-neutralLight);
-  color: var(--color-neutralDark);
-  transition: background-color 0.3s, color 0.3s;
+  color: var(--color-fontLight);
+  transition: background-color .3s, color .3s;
 }
-
 .dark body {
   background-color: var(--color-neutralDark);
-  color: var(--color-neutralLight);
+  color: var(--color-fontDark);
+}
+html { scroll-behavior: smooth; }
+
+/* ===============================
+   UTILITARIAS DE COLOR (opcionales)
+   =============================== */
+.bg-primary      { background-color: var(--color-primaryLight); }
+.dark .bg-primary{ background-color: var(--color-primaryDark); }
+
+.bg-card      { background-color: var(--color-backgroundLight); }
+.dark .bg-card{ background-color: var(--color-secondaryDark); }
+
+.bg-surface      { background-color: var(--color-backgroundLight); }
+.dark .bg-surface{ background-color: var(--color-neutralDark); }
+
+.bg-secondary      { background-color: var(--color-secondaryLight); }
+.dark .bg-secondary{ background-color: var(--color-secondaryDark); }
+
+.bg-accent      { background-color: var(--color-secondaryLight); }
+.dark .bg-accent{ background-color: #1d1d25; }
+
+.bg-neutral      { background-color: var(--color-neutralLight); }
+.dark .bg-neutral{ background-color: var(--color-neutralDark); }
+
+.bg-background      { background-color: var(--color-backgroundLight); }
+.dark .bg-background{ background-color: var(--color-backgroundDark); }
+
+.text-primary      { color: var(--color-primaryLight); }
+.dark .text-primary{ color: var(--color-primaryDark); }
+
+/* Texto de alto contraste para el Hero */
+.text-hero-primary { color: var(--color-primaryLight); }
+.dark .text-hero-primary { color: #FF9DB4; }
+.text-hero-body { color: var(--color-fontLight); }
+.dark .text-hero-body { color: var(--color-fontDark); }
+
+/* Bordes rápidos */
+.border-primary      { border-color: var(--color-primaryLight); }
+.dark .border-primary{ border-color: var(--color-primaryDark); }
+
+/* ===============================
+   NAVBAR superficie blanca
+   =============================== */
+.navbar-surface {
+  background: #FFFFFF;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Clases utilitarias personalizadas */
-/* Clases utilitarias personalizadas */
+.dark .navbar-surface {
+  background: #2a2c31;
+  border-bottom-color: rgba(255,157,180,.12);
+}
 
-/* Fondos */
-.bg-primary { background-color: var(--color-primaryLight); }
-.dark .bg-primary { background-color: var(--color-primaryDark); }
-
-.bg-secondary { background-color: var(--color-secondaryLight); }
-.dark .bg-secondary { background-color: var(--color-secondaryDark); }
-
-.bg-accent { background-color: var(--color-accentLight); }
-.dark .bg-accent { background-color: var(--color-accentDark); }
-
-.bg-neutral { background-color: var(--color-neutralLight); }
-.dark .bg-neutral { background-color: var(--color-neutralDark); }
-
-.bg-background { background-color: var(--color-backgroundLight); }
-.dark .bg-background { background-color: var(--color-backgroundDark); }
-
-/* Texto */
-.text-primary { color: var(--color-primaryLight); }
-.dark .text-primary { color: var(--color-primaryDark); }
-
-.text-secondary { color: var(--color-secondaryLight); }
-.dark .text-secondary { color: var(--color-secondaryDark); }
-
-.text-accent { color: var(--color-fontLight); }
-.dark .text-accent { color: var(--color-fontDark); }
-
-.text-neutral { color: var(--color-neutralLight); }
-.dark .text-neutral { color: var(--color-neutralDark); }
-
-.text-background { color: var(--color-backgroundLight); }
-.dark .text-background { color: var(--color-backgroundDark); }
-
-/* Bordes */
-.border-primary { border-color: var(--color-primaryLight); }
-.dark .border-primary { border-color: var(--color-primaryDark); }
-
-.border-secondary { border-color: var(--color-secondaryLight); }
-.dark .border-secondary { border-color: var(--color-secondaryDark); }
-
-.border-accent { border-color: var(--color-accentLight); }
-.dark .border-accent { border-color: var(--color-accentDark); }
-
-.border-neutral { border-color: var(--color-neutralLight); }
-.dark .border-neutral { border-color: var(--color-neutralDark); }
-
-
-.btn-custom {
-  @apply px-6 py-3 rounded-lg font-semibold transition;
-  background-color: var(--color-primaryLight);
+/* ===============================
+   BOTONES
+   =============================== */
+.btn-hero {
+  @apply px-6 py-3 rounded-xl font-semibold shadow-md transition;
+  background: var(--color-primaryLight);
   color: var(--color-backgroundLight);
+  box-shadow: 0 10px 22px rgba(209,77,114,.26);
 }
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(209,77,114,.34); }
 
-.btn-custom:hover {
-  @apply opacity-90;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: var(--color-accentLight);
+.btn-hero-outline {
+  @apply px-6 py-3 rounded-xl font-semibold border transition;
+  border-color: var(--color-primaryLight);
   color: var(--color-primaryLight);
 }
+.btn-hero-outline:hover { background: var(--color-primaryLight); color: var(--color-backgroundLight); }
 
-/* Para modo oscuro */
-.dark .btn-custom {
-  background-color: var(--color-primaryDark);
-  color: var(--color-backgroundLight);
+/* ===============================
+   HERO (full height + kawaii sutil)
+   =============================== */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;            /* centra vertical */
+  overflow: hidden;
+  min-height: calc(100vh - var(--nav-h));
+  background:
+    linear-gradient(180deg, #FFFFFF 10%, #faf2f5 55%, #FFEFEF 100%);
 }
 
-.dark .btn-custom:hover {
-  @apply opacity-90;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: var(--color-accentDark);
-  color: var(--color-primaryDark);
+.dark .hero {
+  background:
+    linear-gradient(180deg, #2a2c31 0%, #1d1d25 100%);
 }
 
-html {
-  scroll-behavior: smooth;
+.hero::after {                      /* esquina superior izquierda */
+  width: 20rem; height: 20rem;
+  left: -12%; top: -14%;
+  background: radial-gradient(closest-side, rgba(255,139,167,.12), rgba(255,139,167,0) 70%);
 }
+.dark .hero::before { background: radial-gradient(closest-side, rgba(178,75,75,.22), rgba(178,75,75,0) 70%); }
+.dark .hero::after  { background: radial-gradient(closest-side, rgba(178,75,75,.16), rgba(178,75,75,0) 70%); }
+
+/* Avatar grande + aro sutil */
+.avatar-lg { width: 15rem; height: 15rem; }  /* 160px desktop */
+@media (max-width: 767px){ .avatar-lg { width: 8.5rem; height: 8.5rem; } }
+.avatar-ring { box-shadow: inset 0 0 0 3px rgba(209,77,114,.18); }
+
+/* ===============================
+   Misc
+   =============================== */
+@keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+.animate-float { animation: float 4s ease-in-out infinite; }
